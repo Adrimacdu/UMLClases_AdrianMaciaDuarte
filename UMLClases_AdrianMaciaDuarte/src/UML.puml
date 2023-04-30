@@ -1,0 +1,58 @@
+@startuml
+'https://plantuml.com/class-diagram
+AAUOC o-- "0..*" Location
+AAUOC o-- "0..*" Event
+AAUOC o-- "0..*" Person
+
+Person <|-- Member
+Event <|-- Conference
+Event <|-- BoardMeeting
+Member <|-- BoardMember
+
+Location "1" -- "0..*" Event : IsLocatedIn
+Event "0..*" -- "0..*" Member : attendsTo
+BoardMeeting "0..*" -- "0..*" BoardMember : attendsTo
+Conference "0..*" -- "0..*" Person : attendsTo
+
+
+
+class AAUOC{
+newLocation(l : Location) : void
+newEvent(e : Event) : void
+newPerson(p : Person) : void
+informEvent(e : Event) : void
+register(m : Member, e : Event) : void
+}
+
+class Location{
+description : String
+address : String
+}
+
+class Person{
+name : String
+}
+
+class Event{
+date : Date
+description : String
+assign(l : Location) : void
+}
+
+class Member{
+e-mail : String
+}
+
+class Conference{
+max_attendees : Integer
+}
+
+class BoardMeeting{
+
+}
+
+class BoardMember{
+
+}
+
+@enduml
